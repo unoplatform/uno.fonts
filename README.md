@@ -1,3 +1,7 @@
+# Uno Platform Open Source Fonts
+
+A collection of fonts made to be used with [Uno Platform projects](https://platform.uno).
+
 # Icons sources
 Some icons are unique to the font, the other ones come from multiple sources:
 
