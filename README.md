@@ -21,7 +21,7 @@ If you have an existing Uno Platform application using older version of the font
 # Icon sources
 Some icons are unique to the font, the other ones come from multiple sources:
 
-Windows Fluent system icons
+Fluent UI System Icons
 https://github.com/microsoft/fluentui-system-icons
 
 Icons 8 Line awesome
