@@ -1,11 +1,27 @@
-# Uno FluentUI Assets Open Source Font
+# Uno Fluent UI Assets Open Source Font
 
 An icon font for the [Fluent design system](https://www.microsoft.com/design/fluent). Uno FluentUI Assets is intended to be a drop-in replacement for Microsoft's Segoe MDL2 Assets font for use with [Uno Platform](https://platform.uno), WinUI and UWP apps.
+
+# Icon fonts
+
+This repository includes two icon fonts:
+
+- **Uno Fluent Icons** - matches the Windows 11 iconography style
+- **Uno MDL2 Assets** - matches the Windows 10 iconography style
+
+Both fonts use the same font family name and file names to make it possible to easily swap them in place.
+
+# Updating existing application
+
+If you have an existing Uno Platform application using older version of the font and want to update to the latest, two steps are needed:
+
+1. Find all files with the name `uno-fluentui-assets.ttf` and replace them with the same file from the updated icon font.
+2. Inside of the WebAssembly project find `Fonts.css` file and replace it with the one provided by updated icon font.
 
 # Icon sources
 Some icons are unique to the font, the other ones come from multiple sources:
 
-Windows Fluent system icons
+Fluent UI System Icons
 https://github.com/microsoft/fluentui-system-icons
 
 Icons 8 Line awesome
