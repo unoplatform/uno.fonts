@@ -16,12 +16,12 @@
 
 		<contentFiles>
 			<!-- Include Assets as Content so that the Uno's packaging steps picks it up -->
-			<files include="content/Assets/Fonts/uno-fluentui-assets.ttf" buildAction="Content" />
+			<files include="contentFiles/Assets/Fonts/uno-fluentui-assets.ttf" buildAction="Content" />
 		</contentFiles>
 	</metadata>
 
 	<files>
 		<file src="icon.png" />
-		<file src="../webfonts/Uno Fluent Icons/uno-fluentui-assets.ttf" target="content/Assets/Fonts" />
+		<file src="../webfonts/Uno Fluent Icons/uno-fluentui-assets.ttf" target="contentFiles/any/any/Assets/Fonts" />
 	</files>
 </package>
