@@ -42,18 +42,18 @@ jobs:
       uses: gittools/actions/gitversion/execute@v0.9.9
       with:
         useConfigFile: true
-        configFilePath: gitversion.yml
+        configFilePath: build/gitversion.yml
 
-    - name: Build - CI
+    - name: Build
       run: |
         $adjustedPackageVersion="${{ steps.gitversion.outputs.semVer }}".ToLower();
-        dotnet pack -c Release -p:PackageVersion=$adjustedPackageVersion -p:Version=${{ steps.gitversion.outputs.assemblySemVer }} -o .\artifacts UnoCheck\UnoCheck.csproj
+        build/nuget.exe pack nuget/Uno.Fonts.Fluent.nuspec -Version $adjustedPackageVersion -OutputDirectory ./artifacts
         
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
         name: NuGet
-        path: .\artifacts
+        path: ./artifacts
         
   publish:
     name: Publish
