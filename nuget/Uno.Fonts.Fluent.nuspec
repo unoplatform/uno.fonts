@@ -7,11 +7,12 @@
 		<title>Uno Platform Fluent Font</title>
 		<authors>Uno Platform</authors>
 		<owners>unoplatform</owners>
+    	<license type="expression">Apache-2.0</license>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<projectUrl>https://github.com/unoplatform/uno.fonts</projectUrl>
 		<icon>icon.png</icon>
 		<description>Uno Platform Fluent Font (Windows 11 iconography)</description>
-		<copyright>Copyright (C) 2015-2022 Uno Platform inc. - all rights reserved</copyright>
+		<copyright>Copyright (C) 2015-2023 Uno Platform inc. - all rights reserved</copyright>
 		<repository type="git" url="https://github.com/unoplatform/uno.fonts.git" />
 
 		<contentFiles>
