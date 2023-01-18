@@ -14,15 +14,13 @@
 		<description>Uno Platform Fluent Font (Windows 11 iconography)</description>
 		<copyright>Copyright (C) 2015-2023 Uno Platform inc. - all rights reserved</copyright>
 		<repository type="git" url="https://github.com/unoplatform/uno.fonts.git" />
-
-		<contentFiles>
-			<!-- Include Assets as Content so that the Uno's packaging steps picks it up -->
-			<files include="any/any/Assets/Fonts/uno-fluentui-assets.ttf" buildAction="Content" />
-		</contentFiles>
 	</metadata>
 
 	<files>
 		<file src="icon.png" />
-		<file src="../webfonts/Uno Fluent Icons/uno-fluentui-assets.ttf" target="contentFiles/any/any/Assets/Fonts" />
+		<file src="../webfonts/Uno Fluent Icons/uno-fluentui-assets.ttf" target="lib/netstandard1.0/uno.fonts.fluent/Fonts" />
+		<file src="uno.fonts.fluent.uprimarker" target="lib/netstandard1.0/uno.fonts.fluent.uprimarker" />
+		<file src="uno.fonts.fluent.dll" target="lib/netstandard1.0/uno.fonts.fluent.dll" />
+		<file src="uno.fonts.fluent.props" target="buildTransitive/uno.fonts.fluent.props" />
 	</files>
 </package>
