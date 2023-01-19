@@ -13,14 +13,11 @@
         <Copyright>Copyright (C) 2015-2023 Uno Platform inc. - all rights reserved</Copyright>
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/unoplatform/uno.fonts.git</RepositoryUrl>
-        <IncludeBuildOutput>false</IncludeBuildOutput>
-
-        <!-- https://github.com/NuGet/Home/issues/8583 -->
-        <NoWarn>$(NoWarn);NU5128</NoWarn>
     </PropertyGroup>
     <ItemGroup>
         <None Include="icon.png" Pack="true" PackagePath="\"/>
         <None Include="buildTransitive/**/*.*" Pack="true" PackagePath="buildTransitive" />
-        <None Include="../webfonts/Uno Fluent Icons/uno-fluentui-assets.ttf" Pack="true" PackagePath="buildTransitive/Fonts" />
+        <None Include="../webfonts/Uno Fluent Icons/uno-fluentui-assets.ttf" Pack="true" PackagePath="lib/$(TargetFramework)/uno.fonts.fluent/Fonts" />
+        <None Include="uno.fonts.fluent.uprimarker" Pack="true" PackagePath="lib/$(TargetFramework)" />
     </ItemGroup>
 </Project>

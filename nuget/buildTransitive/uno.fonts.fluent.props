@@ -3,8 +3,4 @@
 	<PropertyGroup Condition="'$(UnoFontsFluentDisableImport)'==''">
 		<UnoPlatformDefaultSymbolsFontFamily>ms-appx://uno.fonts.fluent/Fonts/uno-fluentui-assets.ttf</UnoPlatformDefaultSymbolsFontFamily>
 	</PropertyGroup>
-
-	<Target Name="_UnoAddPriMarker" AfterTargets="ResolvePackageAssets">
-		<_UnoPriFiles Include="$(MSBuildThisFileDirectory)uno.fonts.fluent.uprimarker" />
-	</Target>
 </Project>
