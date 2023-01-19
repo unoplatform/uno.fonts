@@ -21,5 +21,6 @@
     <ItemGroup>
         <None Include="icon.png" Pack="true" PackagePath="\"/>
         <None Include="buildTransitive/**/*.*" Pack="true" PackagePath="buildTransitive" />
+        <None Include="../webfonts/Uno Fluent Icons/uno-fluentui-assets.ttf" Pack="true" PackagePath="buildTransitive/Fonts" />
     </ItemGroup>
 </Project>
