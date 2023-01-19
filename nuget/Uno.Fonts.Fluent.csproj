@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard1.0</TargetFramework>
+        <MinClientVersion>5.0.0</MinClientVersion>
+        <PackageId>Uno.Fonts.Fluent</PackageId>
+        <Title>Uno Platform Fluent Font</Title>
+        <Authors>Uno Platform</Authors>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+        <PackageProjectUrl>https://github.com/unoplatform/uno.fonts</PackageProjectUrl>
+        <PackageIcon>icon.png</PackageIcon>
+        <Description>Uno Platform Fluent Font (Windows 11 iconography)</Description>
+        <Copyright>Copyright (C) 2015-2023 Uno Platform inc. - all rights reserved</Copyright>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/unoplatform/uno.fonts.git</RepositoryUrl>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+
+        <!-- https://github.com/NuGet/Home/issues/8583 -->
+        <NoWarn>$(NoWarn);NU5128</NoWarn>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="icon.png" Pack="true" PackagePath="\"/>
+        <None Include="buildTransitive/**/*.*" Pack="true" PackagePath="buildTransitive" />
+    </ItemGroup>
+</Project>
