@@ -49,6 +49,7 @@ jobs:
         cd nuget
         dotnet new classlib -f netstandard2.0 -o uno.fonts.fluent
         cd uno.fonts.fluent
+        rm *.cs
         dotnet build -c Release
         cp bin\Release\netstandard2.0\uno.fonts.fluent.dll ..
     
