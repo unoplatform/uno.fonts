@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Project>
-	<PropertyGroup Condition="'$(UnoFontsFluentDisableImport)'==''">
-		<UnoPlatformDefaultSymbolsFontFamily>ms-appx://uno.fonts.fluent/Fonts/uno-fluentui-assets.ttf</UnoPlatformDefaultSymbolsFontFamily>
-	</PropertyGroup>
-</Project>
