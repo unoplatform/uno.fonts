@@ -18,9 +18,9 @@
 
 	<files>
 		<file src="icon.png" />
-		<file src="../webfonts/Uno Fluent Icons/uno-fluentui-assets.ttf" target="lib/netstandard1.0/uno.fonts.fluent/Fonts" />
-		<file src="uno.fonts.fluent.uprimarker" target="lib/netstandard1.0/uno.fonts.fluent.uprimarker" />
-		<file src="uno.fonts.fluent.dll" target="lib/netstandard1.0/uno.fonts.fluent.dll" />
-		<file src="uno.fonts.fluent.props" target="buildTransitive/uno.fonts.fluent.props" />
+		<file src="../webfonts/Uno Fluent Icons/uno-fluentui-assets.ttf" target="lib/netstandard1.0/Uno.Fonts.Fluent/Fonts" />
+		<file src="Uno.Fonts.Fluent.uprimarker" target="lib/netstandard1.0/Uno.Fonts.Fluent.uprimarker" />
+		<file src="Uno.Fonts.Fluent.dll" target="lib/netstandard1.0/Uno.Fonts.Fluent.dll" />
+		<file src="Uno.Fonts.Fluent.props" target="buildTransitive/Uno.Fonts.Fluent.props" />
 	</files>
 </package>
