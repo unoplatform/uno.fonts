@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	
+	<metadata minClientVersion="5.0.0">
+		<id>Uno.Fonts.Fluent</id>
+		<version>1.0.0.0</version>
+		<title>Uno Platform Fluent Font</title>
+		<authors>Uno Platform</authors>
+		<owners>unoplatform</owners>
+    	<license type="expression">Apache-2.0</license>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<projectUrl>https://github.com/unoplatform/uno.fonts</projectUrl>
+		<icon>icon.png</icon>
+		<description>Uno Platform Fluent Font (Windows 11 iconography)</description>
+		<copyright>Copyright (C) 2015-2023 Uno Platform inc. - all rights reserved</copyright>
+		<repository type="git" url="https://github.com/unoplatform/uno.fonts.git" />
+	</metadata>
+
+	<files>
+		<file src="../icon.png" />
+		<file src="../../webfonts/Uno Fluent Icons/uno-fluentui-assets.ttf" target="lib/netstandard1.0/Uno.Fonts.Fluent/Fonts" />
+		<file src="Uno.Fonts.Fluent.uprimarker" target="lib/netstandard1.0/Uno.Fonts.Fluent.uprimarker" />
+		<file src="Uno.Fonts.Fluent.dll" target="lib/netstandard1.0/Uno.Fonts.Fluent.dll" />
+		<file src="Uno.Fonts.Fluent.props" target="buildTransitive/Uno.Fonts.Fluent.props" />
+	</files>
+</package>
