@@ -18,6 +18,14 @@ on:
 
 jobs:
   build_tool:
+    strategy:
+        matrix:
+          include:
+            - fontName: "Fluent"
+              projectName: uno.fonts.fluent
+            - fontName: "Roboto"
+              projectName: uno.fonts.roboto
+
     name: Build
     runs-on: windows-latest
     steps:
@@ -44,19 +52,19 @@ jobs:
         useConfigFile: true
         configFilePath: build/gitversion.yml
 
-    - name: Build
+    - name: Build ${{ matrix.fontName }} Font
       run: |
         cd nuget
-        dotnet new classlib -f netstandard2.0 -o uno.fonts.fluent
-        cd uno.fonts.fluent
+        dotnet new classlib -f netstandard2.0 -o ${{ matrix.projectName }}
+        cd ${{ matrix.projectName }}
         rm *.cs
         dotnet build -c Release
-        cp bin\Release\netstandard2.0\uno.fonts.fluent.dll ..
+        cp bin\Release\netstandard2.0\${{ matrix.projectName }}.dll ../${{ matrix.fontName }}
     
     - name: Pack
       run: |
         $adjustedPackageVersion="${{ steps.gitversion.outputs.semVer }}".ToLower();
-        build/nuget.exe pack nuget/Uno.Fonts.Fluent.nuspec -Version $adjustedPackageVersion -OutputDirectory ./artifacts
+        build/nuget.exe pack nuget/${{ matrix.fontName }}/Uno.Fonts.${{ matrix.fontName }}.nuspec -Version $adjustedPackageVersion -OutputDirectory ./artifacts
         
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2

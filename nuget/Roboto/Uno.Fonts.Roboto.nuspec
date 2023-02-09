@@ -2,25 +2,26 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	
 	<metadata minClientVersion="5.0.0">
-		<id>Uno.Fonts.Fluent</id>
+		<id>Uno.Fonts.Roboto</id>
 		<version>1.0.0.0</version>
-		<title>Uno Platform Fluent Font</title>
+		<title>Uno Platform Roboto Font</title>
 		<authors>Uno Platform</authors>
 		<owners>unoplatform</owners>
     	<license type="expression">Apache-2.0</license>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<projectUrl>https://github.com/unoplatform/uno.fonts</projectUrl>
 		<icon>icon.png</icon>
-		<description>Uno Platform Fluent Font (Windows 11 iconography)</description>
+		<description>Uno Platform Roboto Font</description>
 		<copyright>Copyright (C) 2015-2023 Uno Platform inc. - all rights reserved</copyright>
 		<repository type="git" url="https://github.com/unoplatform/uno.fonts.git" />
 	</metadata>
 
 	<files>
-		<file src="icon.png" />
-		<file src="../webfonts/Uno Fluent Icons/uno-fluentui-assets.ttf" target="lib/netstandard1.0/Uno.Fonts.Fluent/Fonts" />
-		<file src="Uno.Fonts.Fluent.uprimarker" target="lib/netstandard1.0/Uno.Fonts.Fluent.uprimarker" />
-		<file src="Uno.Fonts.Fluent.dll" target="lib/netstandard1.0/Uno.Fonts.Fluent.dll" />
-		<file src="Uno.Fonts.Fluent.props" target="buildTransitive/Uno.Fonts.Fluent.props" />
+		<file src="../icon.png" />
+		<file src="../../webfonts/Roboto/Roboto-Light.ttf" target="lib/netstandard1.0/Uno.Fonts.Roboto/Fonts" />
+		<file src="../../webfonts/Roboto/Roboto-Medium.ttf" target="lib/netstandard1.0/Uno.Fonts.Roboto/Fonts" />
+		<file src="../../webfonts/Roboto/Roboto-Regular.ttf" target="lib/netstandard1.0/Uno.Fonts.Roboto/Fonts" />
+		<file src="Uno.Fonts.Roboto.uprimarker" target="lib/netstandard1.0/Uno.Fonts.Roboto.uprimarker" />
+		<file src="Uno.Fonts.Roboto.dll" target="lib/netstandard1.0/Uno.Fonts.Roboto.dll" />
 	</files>
 </package>
