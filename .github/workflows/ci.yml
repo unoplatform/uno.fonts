@@ -67,6 +67,7 @@ jobs:
   publish:
     name: Publish
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')) }}
+    environment: NuGet
     runs-on: windows-latest
     needs:
       - build_tool
