@@ -1,5 +1,14 @@
 # Uno.Fonts
 
+[![Open Uno.Fonts in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/unoplatform/uno.fonts) 
+[![GitHub Actions](https://github.com/unoplatform/uno.fonts/actions/workflows/ci.yml/badge.svg)](https://github.com/unoplatform/uno.fonts/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
+Package|Stable|Preview
+-|-|-
+Uno.Fonts.Fluent|[![NuGet stable](https://img.shields.io/nuget/v/Uno.Fonts.Fluent?label=stable)](https://www.nuget.org/packages/Uno.Fonts.Fluent)|[![NuGet preview](https://img.shields.io/nuget/vpre/Uno.Fonts.Fluent?label=preview)](https://www.nuget.org/packages/Uno.Fonts.Fluent)
+Uno.Fonts.Roboto|[![NuGet stable](https://img.shields.io/nuget/v/Uno.Fonts.Roboto?label=stable)](https://www.nuget.org/packages/Uno.Fonts.Roboto)|[![NuGet preview](https://img.shields.io/nuget/vpre/Uno.Fonts.Roboto?label=preview)](https://www.nuget.org/packages/Uno.Fonts.Roboto)
+
 Repository for NuGet packages that can be added to install fonts for any new or existing Uno application. Uno.Fonts currently offers the following fonts as NuGet packages:
 
 # Uno Fluent UI Assets Font

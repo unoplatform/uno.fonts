@@ -1,0 +1,54 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
+	<PropertyGroup>
+		<TargetFrameworks>uap10.0.18362;netstandard2.0;net6.0-windows10.0.18362</TargetFrameworks>
+		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+		<IncludeContentInPack>false</IncludeContentInPack>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Authors>Uno Platform</Authors>
+		<PackageIconUrl>https://nv-assets.azurewebsites.net/logos/uno.png</PackageIconUrl>
+		<PackageProjectUrl>https://github.com/unoplatform/uno.fonts</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/unoplatform/uno.fonts</RepositoryUrl>
+		<Copyright>Copyright (C) 2015-$([System.DateTime]::Now.ToString(`yyyy`)) Uno Platform inc. - all rights reserved</Copyright>
+		<PackageId>Uno.Fonts.Roboto</PackageId>
+		<DefaultLanguage>en-US</DefaultLanguage>
+		<LangVersion>10.0</LangVersion>
+		<Nullable>enable</Nullable>
+		<WarningsAsErrors>enable</WarningsAsErrors>
+		<Title>Uno Platform Roboto Font</Title>
+		<Product>$(AssemblyName) ($(TargetFramework))</Product>
+		<Description>Uno Platform Roboto Font</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="Fonts/*.ttf" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(TargetFramework.Contains('windows10'))">
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Fonts\Roboto-Light.ttf" />
+		<None Remove="Fonts\Roboto-Medium.ttf" />
+		<None Remove="Fonts\Roboto-Regular.ttf" />
+	</ItemGroup>
+	
+	<PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+		<TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);CustomContentTarget</TargetsForTfmSpecificContentInPackage>
+	</PropertyGroup>
+
+	<Target Name="CustomContentTarget" Condition="'$(TargetFramework)'=='netstandard2.0'">
+		<ItemGroup>
+			<TfmSpecificPackageFile Include="Fonts/*.ttf">
+				<PackagePath>lib/$(TargetFramework)/Uno.Fonts.Roboto/Fonts</PackagePath>
+			</TfmSpecificPackageFile>
+
+			<TfmSpecificPackageFile Include="../uno.fonts.roboto.uprimarker">
+				<PackagePath>lib/$(TargetFramework)</PackagePath>
+			</TfmSpecificPackageFile>
+		</ItemGroup>
+	</Target>
+</Project>
