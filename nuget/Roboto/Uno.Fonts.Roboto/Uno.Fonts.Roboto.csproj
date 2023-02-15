@@ -8,7 +8,6 @@
 
 	<PropertyGroup>
 		<Authors>Uno Platform</Authors>
-		<PackageIconUrl>https://nv-assets.azurewebsites.net/logos/uno.png</PackageIconUrl>
 		<PackageProjectUrl>https://github.com/unoplatform/uno.fonts</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/unoplatform/uno.fonts</RepositoryUrl>
 		<Copyright>Copyright (C) 2015-$([System.DateTime]::Now.ToString(`yyyy`)) Uno Platform inc. - all rights reserved</Copyright>
@@ -20,7 +19,21 @@
 		<Title>Uno Platform Roboto Font</Title>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
 		<Description>Uno Platform Roboto Font</Description>
+		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="../../icon.png" Pack="true" PackagePath="icon.png" />
+	</ItemGroup>
+
+	<Target Name="UnoForceIncludeIcon" BeforeTargets="_GetPackageFiles">
+		<ItemGroup>
+			<!-- Quite ugly based on an undocumented implementation detail on NuGet side -->
+			<_PackageFiles Include="@(None)" Condition=" %(None.Pack) == 'true' ">
+				<BuildAction Condition="'%(None.BuildAction)' == ''">None</BuildAction>
+			</_PackageFiles>
+		</ItemGroup>
+	</Target>
 
 	<ItemGroup>
 		<Content Include="Fonts/*.ttf" />
