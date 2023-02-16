@@ -17,23 +17,14 @@ on:
       - release/**
 
 jobs:
-  build_tool:
-    strategy:
-        matrix:
-          include:
-            - fontName: "Fluent"
-              projectName: uno.fonts.fluent
-            - fontName: "Roboto"
-              projectName: uno.fonts.roboto
-
-    name: Build
+  build_fluent:
+    name: Build Fluent
     runs-on: windows-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
-
  
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -52,33 +43,83 @@ jobs:
         useConfigFile: true
         configFilePath: build/gitversion.yml
 
-    - name: Build ${{ matrix.fontName }} Font
+    - name: Build Fluent Font
       run: |
         cd nuget
-        dotnet new classlib -f netstandard2.0 -o ${{ matrix.projectName }}
-        cd ${{ matrix.projectName }}
+        dotnet new classlib -f netstandard2.0 -o uno.fonts.fluent
+        cd uno.fonts.fluent
         rm *.cs
         dotnet build -c Release
-        cp bin\Release\netstandard2.0\${{ matrix.projectName }}.dll ../${{ matrix.fontName }}
+        cp bin\Release\netstandard2.0\uno.fonts.fluent.dll ../Fluent
     
     - name: Pack
       run: |
         $adjustedPackageVersion="${{ steps.gitversion.outputs.semVer }}".ToLower();
-        build/nuget.exe pack nuget/${{ matrix.fontName }}/Uno.Fonts.${{ matrix.fontName }}.nuspec -Version $adjustedPackageVersion -OutputDirectory ./artifacts
+        build/nuget.exe pack nuget/Fluent/Uno.Fonts.Fluent.nuspec -Version $adjustedPackageVersion -OutputDirectory ./artifacts
         
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
         name: NuGet
         path: ./artifacts
-        
+
+  build_roboto:
+    name: Build Roboto
+    runs-on: windows-latest
+    env:
+      WIN_SDK_VERSION: '18362'
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+ 
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.0.100'
+
+    - name: Setup GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.9
+      with:
+        versionSpec: '5.10.3'
+
+    - name: GitVersion
+      id: gitversion
+      uses: gittools/actions/gitversion/execute@v0.9.9
+      with:
+        useConfigFile: true
+        configFilePath: build/gitversion.yml
+
+    - name: Install Windows SDK (${{ env.WIN_SDK_VERSION }})
+      shell: pwsh
+      run: |
+        build/Install-WindowsSdkISO.ps1 $env:WIN_SDK_VERSION
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1
+
+    - name: NuGet Restore
+      run: |
+        build\nuget.exe restore nuget\Roboto\Uno.Fonts.Roboto\Uno.Fonts.Roboto.sln
+
+    - name: Pack Roboto Font
+      run: |
+        $adjustedPackageVersion="${{ steps.gitversion.outputs.semVer }}".ToLower();
+        msbuild nuget\Roboto\Uno.Fonts.Roboto\Uno.Fonts.Roboto.csproj -t:pack -p:PackageVersion=$adjustedPackageVersion -p:PackageOutputPath=artifacts
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: NuGet
+        path: nuget\Roboto\Uno.Fonts.Roboto\artifacts
+
   publish:
     name: Publish
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')) }}
     environment: NuGet
     runs-on: windows-latest
-    needs:
-      - build_tool
+    needs: [build_fluent, build_roboto]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
