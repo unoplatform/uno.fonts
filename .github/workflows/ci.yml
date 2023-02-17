@@ -106,7 +106,7 @@ jobs:
     - name: Pack Roboto Font
       run: |
         $adjustedPackageVersion="${{ steps.gitversion.outputs.semVer }}".ToLower();
-        msbuild nuget\Roboto\Uno.Fonts.Roboto\Uno.Fonts.Roboto.csproj -t:pack -p:PackageVersion=$adjustedPackageVersion -p:PackageOutputPath=artifacts
+        msbuild nuget\Roboto\Uno.Fonts.Roboto\Uno.Fonts.Roboto.csproj -t:pack -p:Configuration=Release -p:PackageVersion=$adjustedPackageVersion -p:PackageOutputPath=artifacts
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
