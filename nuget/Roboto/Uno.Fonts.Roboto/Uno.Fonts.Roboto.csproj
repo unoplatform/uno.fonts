@@ -59,7 +59,7 @@
 				<PackagePath>lib/$(TargetFramework)/Uno.Fonts.Roboto/Fonts</PackagePath>
 			</TfmSpecificPackageFile>
 
-			<TfmSpecificPackageFile Include="../uno.fonts.roboto.uprimarker">
+			<TfmSpecificPackageFile Include="../Uno.Fonts.Roboto.uprimarker">
 				<PackagePath>lib/$(TargetFramework)</PackagePath>
 			</TfmSpecificPackageFile>
 		</ItemGroup>
