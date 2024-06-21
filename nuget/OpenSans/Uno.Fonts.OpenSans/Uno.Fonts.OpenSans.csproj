@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>netstandard1.0</TargetFramework>
+		<!-- It doesn't harm to keep it compatible with net7.0, so doing so -->
+		<TargetFramework>net7.0</TargetFramework>
 		<Authors>Uno Platform</Authors>
 		<PackageProjectUrl>https://github.com/unoplatform/uno.fonts</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/unoplatform/uno.fonts</RepositoryUrl>
@@ -20,7 +21,8 @@
 
 	<ItemGroup>
 		<None Include="../../icon.png" Pack="true" PackagePath="icon.png" />
-		<None Include="../Uno.Fonts.OpenSans.uprimarker" Pack="true" PackagePath="lib/$(TargetFramework)/" />
-		<None Include="Fonts/*.ttf" Pack="true" PackagePath="lib/$(TargetFramework)/Uno.Fonts.OpenSans/Fonts/" />
+		<None Include="../Uno.Fonts.OpenSans.uprimarker" Pack="true" PackagePath="lib/net7.0" />
+		<None Include="Fonts/*.ttf" Pack="true" PackagePath="lib/net7.0/Uno.Fonts.OpenSans/Fonts/" />
+		<None Include="buildTransitive/**/*" Pack="true" PackagePath="buildTransitive/" />
 	</ItemGroup>
 </Project>
