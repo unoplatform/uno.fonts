@@ -4,12 +4,12 @@
         <!-- For platforms that already support variable fonts, we remove the static font files. -->
         <_AllChildProjectItemsWithTargetPath
             Remove="$(MSBuildThisFileDirectory)..\..\lib\net7.0\Uno.Fonts.OpenSans\Fonts\**-**.ttf"
-            Condition="'$(UnoSupportsVariableFonts)'=='true'" />
+            Condition="'$(SupportsFontManifest)'!='true'" />
 
         <!-- The variable font file is exactly named OpenSans.ttf -->
         <!-- For platforms that don't support variable fonts, we remove that file -->
         <_AllChildProjectItemsWithTargetPath
             Remove="$(MSBuildThisFileDirectory)..\..\lib\net7.0\Uno.Fonts.OpenSans\Fonts\OpenSans.ttf"
-            Condition="'$(UnoSupportsVariableFonts)'!='true'" />
+            Condition="'$(SupportsFontManifest)'=='true'" />
     </Target>
 </Project>
