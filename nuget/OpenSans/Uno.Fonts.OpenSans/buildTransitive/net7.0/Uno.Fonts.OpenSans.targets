@@ -1,0 +1,15 @@
+<Project>
+    <Target Name="UnoRemoveUnusedOpenSans" AfterTargets="_UnoAddLibraryAssets">
+        <!-- Static font files contain dash in the name, so that's what we remove. -->
+        <!-- For platforms that already support variable fonts, we remove the static font files. -->
+        <_AllChildProjectItemsWithTargetPath
+            Remove="$(MSBuildThisFileDirectory)..\..\lib\net7.0\Uno.Fonts.OpenSans\Fonts\**-**.ttf"
+            Condition="'$(SupportsFontManifest)'!='true'" />
+
+        <!-- The variable font file is exactly named OpenSans.ttf -->
+        <!-- For platforms that don't support variable fonts, we remove that file -->
+        <_AllChildProjectItemsWithTargetPath
+            Remove="$(MSBuildThisFileDirectory)..\..\lib\net7.0\Uno.Fonts.OpenSans\Fonts\OpenSans.ttf"
+            Condition="'$(SupportsFontManifest)'=='true'" />
+    </Target>
+</Project>
