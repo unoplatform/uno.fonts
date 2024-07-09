@@ -23,6 +23,7 @@
 		<None Include="../../icon.png" Pack="true" PackagePath="icon.png" />
 		<None Include="../Uno.Fonts.OpenSans.uprimarker" Pack="true" PackagePath="lib/net7.0" />
 		<None Include="Fonts/*.ttf" Pack="true" PackagePath="lib/net7.0/Uno.Fonts.OpenSans/Fonts/" />
+		<None Include="Fonts/OpenSans.ttf.manifest" Pack="true" PackagePath="lib/net7.0/Uno.Fonts.OpenSans/Fonts/" />
 		<None Include="buildTransitive/**/*" Pack="true" PackagePath="buildTransitive/" />
 	</ItemGroup>
 </Project>
