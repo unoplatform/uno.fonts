@@ -58,7 +58,7 @@ jobs:
         build/nuget.exe pack nuget/Fluent/Uno.Fonts.Fluent.nuspec -Version $adjustedPackageVersion -OutputDirectory ./artifacts
         
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: NuGet
         path: ./artifacts
@@ -109,7 +109,7 @@ jobs:
         msbuild nuget\Roboto\Uno.Fonts.Roboto\Uno.Fonts.Roboto.csproj -t:pack -p:Configuration=Release -p:PackageVersion=$adjustedPackageVersion -p:PackageOutputPath=artifacts
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: NuGet
         path: nuget\Roboto\Uno.Fonts.Roboto\artifacts
@@ -148,7 +148,7 @@ jobs:
         dotnet pack nuget\OpenSans\Uno.Fonts.OpenSans\Uno.Fonts.OpenSans.csproj -c Release -p:PackageVersion=$adjustedPackageVersion -p:PackageOutputPath=artifacts
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: NuGet
         path: nuget\OpenSans\Uno.Fonts.OpenSans\artifacts
@@ -164,7 +164,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Download Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: NuGet
           path: artifacts
@@ -183,7 +183,7 @@ jobs:
           build\SignClient sign -i artifacts\*.nupkg -c build\SignClient.json -r "${{ secrets.UNO_PLATFORM_CODESIGN_USERNAME }}" -s "${{ secrets.UNO_PLATFORM_CODESIGN_SECRET }}" -n "Uno.Check" -d "Uno.Check" -u "https://github.com/unoplatform/uno.check"
         
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: NuGet-Signed
           path: ./artifacts
