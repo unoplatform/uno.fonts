@@ -56,15 +56,9 @@ jobs:
       run: |
         $adjustedPackageVersion="${{ steps.gitversion.outputs.semVer }}".ToLower();
         build/nuget.exe pack nuget/Fluent/Uno.Fonts.Fluent.nuspec -Version $adjustedPackageVersion -OutputDirectory ./artifacts
-<<<<<<< HEAD
-        
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
-=======
 
     - name: Upload Fluent Artifacts  # Changed to have unique name for artifacts
       uses: actions/upload-artifact@v4
->>>>>>> 28b88be (ci: Fix artifact handling for GitHub Actions v4)
       with:
         name: NuGet-Fluent
         path: ./artifacts
@@ -114,13 +108,8 @@ jobs:
         $adjustedPackageVersion="${{ steps.gitversion.outputs.semVer }}".ToLower();
         msbuild nuget\Roboto\Uno.Fonts.Roboto\Uno.Fonts.Roboto.csproj -t:pack -p:Configuration=Release -p:PackageVersion=$adjustedPackageVersion -p:PackageOutputPath=artifacts
 
-<<<<<<< HEAD
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
-=======
     - name: Upload Roboto Artifacts  # Changed to have unique name for artifacts
       uses: actions/upload-artifact@v4
->>>>>>> 28b88be (ci: Fix artifact handling for GitHub Actions v4)
       with:
         name: NuGet-Roboto
         path: nuget\Roboto\Uno.Fonts.Roboto\artifacts
@@ -158,13 +147,8 @@ jobs:
         $adjustedPackageVersion="${{ steps.gitversion.outputs.semVer }}".ToLower();
         dotnet pack nuget\OpenSans\Uno.Fonts.OpenSans\Uno.Fonts.OpenSans.csproj -c Release -p:PackageVersion=$adjustedPackageVersion -p:PackageOutputPath=artifacts
 
-<<<<<<< HEAD
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
-=======
     - name: Upload OpenSans Artifacts  # Changed to have unique name for artifacts
       uses: actions/upload-artifact@v4
->>>>>>> 28b88be (ci: Fix artifact handling for GitHub Actions v4)
       with:
         name: NuGet-OpenSans
         path: nuget\OpenSans\Uno.Fonts.OpenSans\artifacts
@@ -179,19 +163,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-<<<<<<< HEAD
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: NuGet
-          path: artifacts
-=======
     - name: Download Fluent Artifacts  # Adjusted to download specific artifact
       uses: actions/download-artifact@v4
       with:
         name: NuGet-Fluent
         path: artifacts/fluent
->>>>>>> 28b88be (ci: Fix artifact handling for GitHub Actions v4)
 
     - name: Download Roboto Artifacts  # Adjusted to download specific artifact
       uses: actions/download-artifact@v4
@@ -199,7 +175,6 @@ jobs:
         name: NuGet-Roboto
         path: artifacts/roboto
 
-<<<<<<< HEAD
       - name: Setup SignClient
         run: |
           dotnet tool install --tool-path build SignClient
@@ -208,18 +183,11 @@ jobs:
         run: |
           build\SignClient sign -i artifacts\*.nupkg -c build\SignClient.json -r "${{ secrets.UNO_PLATFORM_CODESIGN_USERNAME }}" -s "${{ secrets.UNO_PLATFORM_CODESIGN_SECRET }}" -n "Uno.Check" -d "Uno.Check" -u "https://github.com/unoplatform/uno.check"
         
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: NuGet-Signed
-          path: ./artifacts
-=======
     - name: Download OpenSans Artifacts  # Adjusted to download specific artifact
       uses: actions/download-artifact@v4
       with:
         name: NuGet-OpenSans
         path: artifacts/opensans
->>>>>>> 28b88be (ci: Fix artifact handling for GitHub Actions v4)
 
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v1
