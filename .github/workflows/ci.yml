@@ -175,14 +175,6 @@ jobs:
         name: NuGet-Roboto
         path: artifacts/roboto
 
-      - name: Setup SignClient
-        run: |
-          dotnet tool install --tool-path build SignClient
-      - name: SignClient
-        shell: pwsh
-        run: |
-          build\SignClient sign -i artifacts\*.nupkg -c build\SignClient.json -r "${{ secrets.UNO_PLATFORM_CODESIGN_USERNAME }}" -s "${{ secrets.UNO_PLATFORM_CODESIGN_SECRET }}" -n "Uno.Check" -d "Uno.Check" -u "https://github.com/unoplatform/uno.check"
-        
     - name: Download OpenSans Artifacts  # Adjusted to download specific artifact
       uses: actions/download-artifact@v4
       with:
