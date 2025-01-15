@@ -5,16 +5,26 @@
       xmlns:models="using:Uno.IconFontTester.Models"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-  <Grid>
+  <Grid Padding="8" RowSpacing="8">
     <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-    <StackPanel Orientation="Horizontal" x:Name="ConfigurationPanel">
+    <TextBlock Text="Icon Font Tester" HorizontalAlignment="Center" Style="{ThemeResource HeaderTextBlockStyle}" />
+    <TextBlock Grid.Row="1" TextWrapping="Wrap">
+      <Run Text="To test the icon font, add a copy of SegoeFluentIcons.ttf from C:\Windows\Fonts\ on a Windows 11 machine " />
+      <Run Text="and a copy of the Uno Platfrom Symbols.ttf into the Assets/Fonts folder." />
+      <Run Text="Also add the selection.json file to the same location. Ensure file names match." />
+      <Run Text="Restart the app to see the updates." />
+    </TextBlock>
+    <StackPanel Grid.Row="2" Orientation="Horizontal" x:Name="ConfigurationPanel" Spacing="8" HorizontalAlignment="Center">
       <Button Click="{x:Bind OpenSelectionFolder}">Open selection folder</Button>
       <Button Click="{x:Bind Refresh}">Refresh</Button>
+      <TextBox PlaceholderText="Search..." Text="{x:Bind SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120" />
     </StackPanel>
-    <ListView SelectionMode="None" Grid.Row="1" Padding="8" ItemsSource="{x:Bind Glyphs}">
+    <ListView SelectionMode="None" Grid.Row="3" Padding="8" ItemsSource="{x:Bind FilteredGlyphs}">
       <ListView.ItemTemplate>
         <DataTemplate x:DataType="models:IconItem">
           <Viewbox Width="800" Height="200">
@@ -26,10 +36,10 @@
               </Grid.ColumnDefinitions>
               <TextBlock Text="{x:Bind Id}" />
               <Border HorizontalAlignment="Center" Background="#EEE" BorderBrush="Red" BorderThickness="1" Grid.Column="1">
-                <FontIcon Glyph="{x:Bind Glyph}" FontFamily="ms-appx:///Assets/Fonts/SegoeFluentIcons.ttf#Segoe Fluent Icons" />
+                <FontIcon Foreground="#000" Glyph="{x:Bind Glyph}" FontFamily="ms-appx:///Assets/Fonts/SegoeFluentIcons.ttf#Segoe Fluent Icons" />
               </Border>
               <Border HorizontalAlignment="Center" Background="#EEE" BorderBrush="Red" BorderThickness="1" Grid.Column="2">
-                <FontIcon Grid.Column="2" Glyph="{x:Bind Glyph}" FontFamily="ms-appx:///Assets/Fonts/Symbols.ttf#Symbols" />
+                <FontIcon Foreground="#000" Grid.Column="2" Glyph="{x:Bind Glyph}" FontFamily="ms-appx:///Assets/Fonts/Symbols.ttf#Symbols" />
               </Border>
             </Grid>
           </Viewbox>
