@@ -31,17 +31,11 @@ jobs:
       with:
         dotnet-version: '7.0.100'
 
-    - name: Setup GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.9
+    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+      id: nbgv
       with:
-        versionSpec: '5.10.3'
-
-    - name: GitVersion
-      id: gitversion
-      uses: gittools/actions/gitversion/execute@v0.9.9
-      with:
-        useConfigFile: true
-        configFilePath: build/gitversion.yml
+        toolVersion: 3.6.139
+        setAllVars: true
 
     - name: Build Fluent Font
       run: |
@@ -54,7 +48,7 @@ jobs:
 
     - name: Pack
       run: |
-        $adjustedPackageVersion="${{ steps.gitversion.outputs.semVer }}".ToLower();
+        $adjustedPackageVersion="${{ steps.nbgv.outputs.SemVer2 }}".ToLower();
         build/nuget.exe pack nuget/Fluent/Uno.Fonts.Fluent.nuspec -Version $adjustedPackageVersion -OutputDirectory ./artifacts
 
     - name: Upload Fluent Artifacts  # Changed to have unique name for artifacts
@@ -79,17 +73,11 @@ jobs:
       with:
         dotnet-version: '7.0.100'
 
-    - name: Setup GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.9
+    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+      id: nbgv
       with:
-        versionSpec: '5.10.3'
-
-    - name: GitVersion
-      id: gitversion
-      uses: gittools/actions/gitversion/execute@v0.9.9
-      with:
-        useConfigFile: true
-        configFilePath: build/gitversion.yml
+        toolVersion: 3.6.139
+        setAllVars: true
 
     - name: Install Windows SDK (${{ env.WIN_SDK_VERSION }})
       shell: pwsh
@@ -105,7 +93,7 @@ jobs:
 
     - name: Pack Roboto Font
       run: |
-        $adjustedPackageVersion="${{ steps.gitversion.outputs.semVer }}".ToLower();
+        $adjustedPackageVersion="${{ steps.nbgv.outputs.SemVer2 }}".ToLower();
         msbuild nuget\Roboto\Uno.Fonts.Roboto\Uno.Fonts.Roboto.csproj -t:pack -p:Configuration=Release -p:PackageVersion=$adjustedPackageVersion -p:PackageOutputPath=artifacts
 
     - name: Upload Roboto Artifacts  # Changed to have unique name for artifacts
@@ -130,21 +118,15 @@ jobs:
       with:
         dotnet-version: '7.0.100'
 
-    - name: Setup GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.9
+    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+      id: nbgv
       with:
-        versionSpec: '5.10.3'
-
-    - name: GitVersion
-      id: gitversion
-      uses: gittools/actions/gitversion/execute@v0.9.9
-      with:
-        useConfigFile: true
-        configFilePath: build/gitversion.yml
+        toolVersion: 3.6.139
+        setAllVars: true
 
     - name: Pack OpenSans Font
       run: |
-        $adjustedPackageVersion="${{ steps.gitversion.outputs.semVer }}".ToLower();
+        $adjustedPackageVersion="${{ steps.nbgv.outputs.SemVer2 }}".ToLower();
         dotnet pack nuget\OpenSans\Uno.Fonts.OpenSans\Uno.Fonts.OpenSans.csproj -c Release -p:PackageVersion=$adjustedPackageVersion -p:PackageOutputPath=artifacts
 
     - name: Upload OpenSans Artifacts  # Changed to have unique name for artifacts
