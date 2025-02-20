@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "IconFontTester",
+  "display": "standalone",
+  "name": "IconFontTester",
+  "short_name": "IconFontTester",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}
