@@ -135,10 +135,9 @@ jobs:
         name: NuGet-OpenSans
         path: nuget\OpenSans\Uno.Fonts.OpenSans\artifacts
 
-  publish:
-    name: Publish
+  sign:
+    name: Sign Artifacts
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')) }}
-    environment: NuGet
     runs-on: windows-latest
     environment: PackageSign
 
@@ -147,49 +146,49 @@ jobs:
 
     needs: [build_fluent, build_roboto, build_opensans]
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Download Fluent Artifacts  # Adjusted to download specific artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: NuGet-Fluent
-        path: artifacts/fluent
+      - name: Download Fluent Artifacts # Adjusted to download specific artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: NuGet-Fluent
+          path: artifacts/fluent
 
-    - name: Download Roboto Artifacts  # Adjusted to download specific artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: NuGet-Roboto
-        path: artifacts/roboto
+      - name: Download Roboto Artifacts # Adjusted to download specific artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: NuGet-Roboto
+          path: artifacts/roboto
 
-    - name: Download OpenSans Artifacts  # Adjusted to download specific artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: NuGet-OpenSans
-        path: artifacts/opensans
+      - name: Download OpenSans Artifacts # Adjusted to download specific artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: NuGet-OpenSans
+          path: artifacts/opensans
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '9.0.x'
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '9.0.x'
 
-    # Install the code signing tool
-    - name: Install Sign CLI tool
-      run: dotnet tool install --tool-path . sign --version 0.9.1-beta.25278.1
+      # Install the code signing tool
+      - name: Install Sign CLI tool
+        run: dotnet tool install --tool-path . sign --version 0.9.1-beta.25278.1
 
-    # Login to Azure using a ServicePrincipal configured to authenticate against a GitHub Action
-    - name: 'Az CLI login'
-      uses: azure/login@v1
-      with:
-        allow-no-subscriptions: true
-        client-id: ${{ secrets.SIGN_AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.SIGN_AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.SIGN_AZURE_SUBSCRIPTION_ID }}
+      # Login to Azure using a ServicePrincipal configured to authenticate against a GitHub Action
+      - name: 'Az CLI login'
+        uses: azure/login@v1
+        with:
+          allow-no-subscriptions: true
+          client-id: ${{ secrets.SIGN_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.SIGN_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.SIGN_AZURE_SUBSCRIPTION_ID }}
 
-    # Run the signing command
-    - name: Sign artifacts
-      shell: pwsh
-      run: >
+      # Run the signing command
+      - name: Sign artifacts
+        shell: pwsh
+        run: >
           ./sign code azure-key-vault
           artifacts\**\*.nupkg
           --publisher-name "Uno.Fonts"
@@ -200,13 +199,28 @@ jobs:
           --azure-key-vault-certificate "${{ secrets.SIGN_KEY_VAULT_CERTIFICATE_ID }}"
           --verbosity information
 
-    - name: Upload Signed Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: NuGet-Signed
-        path: ./artifacts
+      - name: Upload Signed Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: NuGet-Signed
+          path: ./artifacts
 
-    - name: NuGet Push
-      shell: pwsh
-      run: |
-        dotnet nuget push artifacts/**/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_ORG_API_KEY }}
+  publish:
+    name: Publish Packages
+    if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')) }}
+    runs-on: windows-latest
+    environment: NuGet
+
+    needs: sign
+
+    steps:
+      - name: Download Signed Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: NuGet-Signed
+          path: artifacts
+
+      - name: NuGet Push
+        shell: pwsh
+        run: |
+          dotnet nuget push artifacts/**/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_ORG_API_KEY }}
