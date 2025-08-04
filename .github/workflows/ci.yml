@@ -189,7 +189,7 @@ jobs:
     # Run the signing command
     - name: Sign artifacts
       shell: pwsh
-        run: >
+      run: >
           ./sign code azure-key-vault
           artifacts\**\*.nupkg
           --publisher-name "Uno.Fonts"
