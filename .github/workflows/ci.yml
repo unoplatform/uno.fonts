@@ -191,7 +191,7 @@ jobs:
       shell: pwsh
         run: >
           ./sign code azure-key-vault
-          artifacts\NuGet\*.nupkg
+          artifacts\**\*.nupkg
           --publisher-name "Uno.Fonts"
           --description "Uno.Fonts"
           --description-url "https://github.com/${{ env.GITHUB_REPOSITORY }}"
