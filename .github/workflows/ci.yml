@@ -256,5 +256,10 @@ jobs:
       run: |
         git config user.email "info@platform.uno"
         git config user.name "Uno DevOps"
-        git tag $env:NBGV_SemVer2
-        git push origin $env:NBGV_SemVer2
+        git rev-parse --verify "refs/tags/$env:NBGV_SemVer2" 2>$null
+        if ($LASTEXITCODE -eq 0) {
+          Write-Host "Tag $env:NBGV_SemVer2 already exists, skipping."
+        } else {
+          git tag $env:NBGV_SemVer2
+          git push origin $env:NBGV_SemVer2
+        }
