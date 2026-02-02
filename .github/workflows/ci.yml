@@ -235,31 +235,31 @@ jobs:
     needs: publish
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '9.0.100'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '9.0.100'
 
-    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
-      id: nbgv
-      with:
-        toolVersion: 3.6.139
-        setAllVars: true
+      - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+        id: nbgv
+        with:
+          toolVersion: 3.6.139
+          setAllVars: true
 
-    - name: Tag and push to GitHub
-      shell: pwsh
-      run: |
-        git config user.email "info@platform.uno"
-        git config user.name "Uno DevOps"
-        git rev-parse --verify "refs/tags/$env:NBGV_SemVer2" 2>$null
-        if ($LASTEXITCODE -eq 0) {
-          Write-Host "Tag $env:NBGV_SemVer2 already exists, skipping."
-        } else {
-          git tag $env:NBGV_SemVer2
-          git push origin $env:NBGV_SemVer2
-        }
+      - name: Tag and push to GitHub
+        shell: pwsh
+        run: |
+          git config user.email "info@platform.uno"
+          git config user.name "Uno DevOps"
+          git rev-parse --verify "refs/tags/$env:NBGV_SemVer2" 2>$null
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "Tag $env:NBGV_SemVer2 already exists, skipping."
+          } else {
+            git tag $env:NBGV_SemVer2
+            git push origin $env:NBGV_SemVer2
+          }
