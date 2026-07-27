@@ -31,11 +31,22 @@ jobs:
       with:
         dotnet-version: '9.0.100'
 
-    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+    - name: Version with NBGV
       id: nbgv
-      with:
-        toolVersion: 3.6.139
-        setAllVars: true
+      shell: pwsh
+      run: |
+        # The hosted runner pre-installs a newer nbgv (targets a .NET runtime not set up
+        # here); the dotnet/nbgv action's `dotnet tool update` won't downgrade to our pinned
+        # build, so uninstall first then install the org-standard 3.6.139 (same approach as
+        # uno core's build/ci gitversion step). Robust against future runner-image drift.
+        $PSNativeCommandUseErrorActionPreference = $false
+        dotnet tool uninstall --global nbgv | Out-Host
+        dotnet tool install --global nbgv --version 3.6.139
+        if ($LASTEXITCODE -ne 0) { throw "nbgv install failed ($LASTEXITCODE)" }
+        $v = (nbgv get-version -f json | ConvertFrom-Json).SemVer2
+        "SemVer2=$v" >> $env:GITHUB_OUTPUT
+        "NBGV_SemVer2=$v" >> $env:GITHUB_ENV
+        Write-Host "NBGV SemVer2: $v"
 
     - name: Build Fluent Font
       run: |
@@ -73,11 +84,22 @@ jobs:
       with:
         dotnet-version: '9.0.100'
 
-    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+    - name: Version with NBGV
       id: nbgv
-      with:
-        toolVersion: 3.6.139
-        setAllVars: true
+      shell: pwsh
+      run: |
+        # The hosted runner pre-installs a newer nbgv (targets a .NET runtime not set up
+        # here); the dotnet/nbgv action's `dotnet tool update` won't downgrade to our pinned
+        # build, so uninstall first then install the org-standard 3.6.139 (same approach as
+        # uno core's build/ci gitversion step). Robust against future runner-image drift.
+        $PSNativeCommandUseErrorActionPreference = $false
+        dotnet tool uninstall --global nbgv | Out-Host
+        dotnet tool install --global nbgv --version 3.6.139
+        if ($LASTEXITCODE -ne 0) { throw "nbgv install failed ($LASTEXITCODE)" }
+        $v = (nbgv get-version -f json | ConvertFrom-Json).SemVer2
+        "SemVer2=$v" >> $env:GITHUB_OUTPUT
+        "NBGV_SemVer2=$v" >> $env:GITHUB_ENV
+        Write-Host "NBGV SemVer2: $v"
 
     - name: Install Windows SDK (${{ env.WIN_SDK_VERSION }})
       shell: pwsh
@@ -118,11 +140,22 @@ jobs:
       with:
         dotnet-version: '9.0.100'
 
-    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+    - name: Version with NBGV
       id: nbgv
-      with:
-        toolVersion: 3.6.139
-        setAllVars: true
+      shell: pwsh
+      run: |
+        # The hosted runner pre-installs a newer nbgv (targets a .NET runtime not set up
+        # here); the dotnet/nbgv action's `dotnet tool update` won't downgrade to our pinned
+        # build, so uninstall first then install the org-standard 3.6.139 (same approach as
+        # uno core's build/ci gitversion step). Robust against future runner-image drift.
+        $PSNativeCommandUseErrorActionPreference = $false
+        dotnet tool uninstall --global nbgv | Out-Host
+        dotnet tool install --global nbgv --version 3.6.139
+        if ($LASTEXITCODE -ne 0) { throw "nbgv install failed ($LASTEXITCODE)" }
+        $v = (nbgv get-version -f json | ConvertFrom-Json).SemVer2
+        "SemVer2=$v" >> $env:GITHUB_OUTPUT
+        "NBGV_SemVer2=$v" >> $env:GITHUB_ENV
+        Write-Host "NBGV SemVer2: $v"
 
     - name: Pack OpenSans Font
       run: |
@@ -151,11 +184,22 @@ jobs:
       with:
         dotnet-version: '9.0.100'
 
-    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+    - name: Version with NBGV
       id: nbgv
-      with:
-        toolVersion: 3.6.139
-        setAllVars: true
+      shell: pwsh
+      run: |
+        # The hosted runner pre-installs a newer nbgv (targets a .NET runtime not set up
+        # here); the dotnet/nbgv action's `dotnet tool update` won't downgrade to our pinned
+        # build, so uninstall first then install the org-standard 3.6.139 (same approach as
+        # uno core's build/ci gitversion step). Robust against future runner-image drift.
+        $PSNativeCommandUseErrorActionPreference = $false
+        dotnet tool uninstall --global nbgv | Out-Host
+        dotnet tool install --global nbgv --version 3.6.139
+        if ($LASTEXITCODE -ne 0) { throw "nbgv install failed ($LASTEXITCODE)" }
+        $v = (nbgv get-version -f json | ConvertFrom-Json).SemVer2
+        "SemVer2=$v" >> $env:GITHUB_OUTPUT
+        "NBGV_SemVer2=$v" >> $env:GITHUB_ENV
+        Write-Host "NBGV SemVer2: $v"
 
     - name: Install Windows SDK (${{ env.WIN_SDK_VERSION }})
       shell: pwsh
@@ -296,11 +340,20 @@ jobs:
         with:
           dotnet-version: '9.0.100'
 
-      - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+      - name: Version with NBGV
         id: nbgv
-        with:
-          toolVersion: 3.6.139
-          setAllVars: true
+        shell: pwsh
+        run: |
+          # See build-job note: uninstall the runner's pre-installed nbgv, then install the
+          # org-standard pinned 3.6.139 so versioning is stable against runner-image drift.
+          $PSNativeCommandUseErrorActionPreference = $false
+          dotnet tool uninstall --global nbgv | Out-Host
+          dotnet tool install --global nbgv --version 3.6.139
+          if ($LASTEXITCODE -ne 0) { throw "nbgv install failed ($LASTEXITCODE)" }
+          $v = (nbgv get-version -f json | ConvertFrom-Json).SemVer2
+          "SemVer2=$v" >> $env:GITHUB_OUTPUT
+          "NBGV_SemVer2=$v" >> $env:GITHUB_ENV
+          Write-Host "NBGV SemVer2: $v"
 
       - name: Tag and push to GitHub
         shell: pwsh
