@@ -1,0 +1,28 @@
+name: Setup NBGV
+description: >-
+  Install the org-standard pinned nbgv (3.6.139) and expose its SemVer2 as both a
+  step output and the NBGV_SemVer2 env var. Uninstalls any pre-installed nbgv first
+  so a newer runner-image build (which `dotnet tool update` refuses to downgrade and
+  which may target an unavailable .NET runtime) can't break versioning — i.e. robust
+  against hosted-runner image drift. Mirrors uno core's build/ci gitversion step.
+
+outputs:
+  SemVer2:
+    description: The NBGV SemVer2 version.
+    value: ${{ steps.nbgv.outputs.SemVer2 }}
+
+runs:
+  using: composite
+  steps:
+    - name: Version with NBGV
+      id: nbgv
+      shell: pwsh
+      run: |
+        $PSNativeCommandUseErrorActionPreference = $false
+        dotnet tool uninstall --global nbgv | Out-Host
+        dotnet tool install --global nbgv --version 3.6.139
+        if ($LASTEXITCODE -ne 0) { throw "nbgv install failed ($LASTEXITCODE)" }
+        $v = (nbgv get-version -f json | ConvertFrom-Json).SemVer2
+        "SemVer2=$v" >> $env:GITHUB_OUTPUT
+        "NBGV_SemVer2=$v" >> $env:GITHUB_ENV
+        Write-Host "NBGV SemVer2: $v"
