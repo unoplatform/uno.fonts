@@ -31,11 +31,8 @@ jobs:
       with:
         dotnet-version: '9.0.100'
 
-    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+    - uses: ./.github/actions/setup-nbgv
       id: nbgv
-      with:
-        toolVersion: 3.6.139
-        setAllVars: true
 
     - name: Build Fluent Font
       run: |
@@ -73,11 +70,8 @@ jobs:
       with:
         dotnet-version: '9.0.100'
 
-    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+    - uses: ./.github/actions/setup-nbgv
       id: nbgv
-      with:
-        toolVersion: 3.6.139
-        setAllVars: true
 
     - name: Install Windows SDK (${{ env.WIN_SDK_VERSION }})
       shell: pwsh
@@ -118,11 +112,8 @@ jobs:
       with:
         dotnet-version: '9.0.100'
 
-    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+    - uses: ./.github/actions/setup-nbgv
       id: nbgv
-      with:
-        toolVersion: 3.6.139
-        setAllVars: true
 
     - name: Pack OpenSans Font
       run: |
@@ -151,11 +142,8 @@ jobs:
       with:
         dotnet-version: '9.0.100'
 
-    - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+    - uses: ./.github/actions/setup-nbgv
       id: nbgv
-      with:
-        toolVersion: 3.6.139
-        setAllVars: true
 
     - name: Install Windows SDK (${{ env.WIN_SDK_VERSION }})
       shell: pwsh
@@ -296,11 +284,8 @@ jobs:
         with:
           dotnet-version: '9.0.100'
 
-      - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+      - uses: ./.github/actions/setup-nbgv
         id: nbgv
-        with:
-          toolVersion: 3.6.139
-          setAllVars: true
 
       - name: Tag and push to GitHub
         shell: pwsh
