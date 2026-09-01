@@ -18,7 +18,7 @@
 		<WarningsAsErrors>enable</WarningsAsErrors>
 		<Title>Uno Platform Inter Font</Title>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<Description>Uno Platform Inter Font — bundles Inter 4.1 (Regular, Medium, SemiBold, Bold) for use with Uno Platform applications.</Description>
+		<Description>Uno Platform Inter Font — bundles the Inter variable font (Inter.ttf, weights 100-900) with static instances (Regular, Medium, SemiBold, Bold) and a font manifest for platforms without variable font support, for use with Uno Platform applications.</Description>
 		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
 
@@ -37,6 +37,7 @@
 
 	<ItemGroup>
 		<Content Include="Fonts/*.ttf" />
+		<Content Include="Fonts/*.ttf.manifest" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework.Contains('windows10'))">
@@ -48,6 +49,8 @@
 		<None Remove="Fonts\Inter-Medium.ttf" />
 		<None Remove="Fonts\Inter-SemiBold.ttf" />
 		<None Remove="Fonts\Inter-Bold.ttf" />
+		<None Remove="Fonts\Inter.ttf" />
+		<None Remove="Fonts\Inter.ttf.manifest" />
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
@@ -57,6 +60,10 @@
 	<Target Name="CustomContentTarget" Condition="'$(TargetFramework)'=='netstandard2.0'">
 		<ItemGroup>
 			<TfmSpecificPackageFile Include="Fonts/*.ttf">
+				<PackagePath>lib/$(TargetFramework)/Uno.Fonts.Inter/Fonts</PackagePath>
+			</TfmSpecificPackageFile>
+
+			<TfmSpecificPackageFile Include="Fonts/*.ttf.manifest">
 				<PackagePath>lib/$(TargetFramework)/Uno.Fonts.Inter/Fonts</PackagePath>
 			</TfmSpecificPackageFile>
 

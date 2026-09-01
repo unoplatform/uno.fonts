@@ -1,0 +1,22 @@
+{
+  "fonts": [
+    {
+      "font_style": "Normal",
+      "font_weight": 300,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-Light.ttf"
+    },
+    {
+      "font_style": "Normal",
+      "font_weight": 400,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-Regular.ttf"
+    },
+    {
+      "font_style": "Normal",
+      "font_weight": 500,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-Medium.ttf"
+    }
+  ]
+}

@@ -37,6 +37,7 @@
 
 	<ItemGroup>
 		<Content Include="Fonts/*.ttf" />
+		<Content Include="Fonts/*.ttf.manifest" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework.Contains('windows10'))">
@@ -47,6 +48,8 @@
 		<None Remove="Fonts\Roboto-Light.ttf" />
 		<None Remove="Fonts\Roboto-Medium.ttf" />
 		<None Remove="Fonts\Roboto-Regular.ttf" />
+		<None Remove="Fonts\Roboto.ttf" />
+		<None Remove="Fonts\Roboto.ttf.manifest" />
 	</ItemGroup>
 	
 	<PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
@@ -56,6 +59,10 @@
 	<Target Name="CustomContentTarget" Condition="'$(TargetFramework)'=='netstandard2.0'">
 		<ItemGroup>
 			<TfmSpecificPackageFile Include="Fonts/*.ttf">
+				<PackagePath>lib/$(TargetFramework)/Uno.Fonts.Roboto/Fonts</PackagePath>
+			</TfmSpecificPackageFile>
+
+			<TfmSpecificPackageFile Include="Fonts/*.ttf.manifest">
 				<PackagePath>lib/$(TargetFramework)/Uno.Fonts.Roboto/Fonts</PackagePath>
 			</TfmSpecificPackageFile>
 
