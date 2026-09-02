@@ -19,7 +19,7 @@
 		<WarningsAsErrors>enable</WarningsAsErrors>
 		<Title>Uno Platform Roboto Font</Title>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<Description>Uno Platform Roboto Font. Bundles the Roboto variable font (Roboto.ttf) with static instances (Light, Regular, Medium, Bold) and a font manifest that resolves FontWeight 300-700 to those instances on Skia and iOS targets, for use with Uno Platform applications.</Description>
+		<Description>Uno Platform Roboto Font. Bundles the Roboto variable font (Roboto.ttf) with static instances for every weight from Thin to Black and a font manifest that resolves FontWeight 100-900 to those instances on Skia and iOS targets, for use with Uno Platform applications.</Description>
 		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
 
@@ -39,12 +39,11 @@
 	</Target>
 
 	<!--
-	Font sources (OFL-1.1; verify with sha256sum, or `git hash-object` against the upstream blob):
-	  Roboto.ttf                      = google/fonts@6183fc0 ofl/roboto/Roboto[wdth,wght].ttf (Version 3.015; 2026)
-	                                    sha256 d7598e12c5dbef095ff8272cfc55da0250bd07fbdecbac8a530b9b277872a134
-	  Roboto-Bold.ttf                 = google/fonts@7b64519 apache/roboto/Roboto-Bold.ttf (Version 2.137; 2017)
-	                                    sha256 7d0b991ee3e0be7af01ad7ea8cd2beea6c00a25e679a0226b6737f079aafff86
-	  Roboto-Light/Regular/Medium.ttf = Roboto Version 2.137; 2017 (glyf/hmtx/hinting tables identical to the google/fonts@7b64519 build)
+	Font sources (OFL-1.1; per-file hashes in Fonts/SHA256SUMS, check with `sha256sum -c SHA256SUMS`):
+	  Roboto.ttf   = google/fonts@6183fc0 ofl/roboto/Roboto[wdth,wght].ttf (Version 3.015; 2026),
+	                 identical to googlefonts/roboto-classic v3.015 web/split/Roboto[wdth,wght].ttf
+	  Roboto-*.ttf = Google Fonts family download (https://fonts.google.com/download/list?family=Roboto),
+	                 static/Roboto-*.ttf, Roboto v51 (Version 3.015; 2026), hinted web build
 	-->
 	<ItemGroup>
 		<Content Include="Fonts/*.ttf" />

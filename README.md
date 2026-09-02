@@ -73,7 +73,7 @@ Simply install the desired Uno.Fonts NuGet package into your Uno project's share
 
 ```
 
-Uno.Fonts.Roboto and Uno.Fonts.Inter ship a variable font (`Roboto.ttf`, `Inter.ttf`) next to the static instances. On Skia and iOS heads a `.ttf.manifest` maps `FontWeight` to a static instance (Roboto: 300, 400, 500, 700; Inter: 400, 500, 600, 700; other weights snap to the nearest listed one, and italics are not covered). Skia heads drop the variable font from the app at build time. Other heads render the variable font directly, with its full weight range.
+Uno.Fonts.Roboto and Uno.Fonts.Inter ship a variable font (`Roboto.ttf`, `Inter.ttf`) next to static instances for every weight from Thin (100) to Black (900). On Skia and iOS heads a `.ttf.manifest` maps `FontWeight` to the matching static instance; italics are not covered and render upright there. Skia heads drop the variable font from the app at build time. Other heads render the variable font directly.
 
 > **NOTE**: If you are using the older versions of the Uno solution templates (with the `.shproj` file) then you will need to install the font NuGet package into each platform's `.csproj`
 

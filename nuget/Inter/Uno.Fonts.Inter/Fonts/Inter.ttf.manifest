@@ -2,6 +2,24 @@
   "fonts": [
     {
       "font_style": "Normal",
+      "font_weight": 100,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Thin.ttf"
+    },
+    {
+      "font_style": "Normal",
+      "font_weight": 200,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Inter/Fonts/Inter-ExtraLight.ttf"
+    },
+    {
+      "font_style": "Normal",
+      "font_weight": 300,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Light.ttf"
+    },
+    {
+      "font_style": "Normal",
       "font_weight": 400,
       "font_stretch": "Normal",
       "family_name": "ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf"
@@ -23,6 +41,18 @@
       "font_weight": 700,
       "font_stretch": "Normal",
       "family_name": "ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Bold.ttf"
+    },
+    {
+      "font_style": "Normal",
+      "font_weight": 800,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Inter/Fonts/Inter-ExtraBold.ttf"
+    },
+    {
+      "font_style": "Normal",
+      "font_weight": 900,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Black.ttf"
     }
   ]
 }

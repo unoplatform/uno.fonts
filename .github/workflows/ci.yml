@@ -175,7 +175,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Check every *.ttf.manifest resolves to packed files
+    - name: Validate font manifests and SHA256SUMS
       shell: pwsh
       run: build/Test-FontManifests.ps1
 

@@ -2,6 +2,18 @@
   "fonts": [
     {
       "font_style": "Normal",
+      "font_weight": 100,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-Thin.ttf"
+    },
+    {
+      "font_style": "Normal",
+      "font_weight": 200,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-ExtraLight.ttf"
+    },
+    {
+      "font_style": "Normal",
       "font_weight": 300,
       "font_stretch": "Normal",
       "family_name": "ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-Light.ttf"
@@ -20,9 +32,27 @@
     },
     {
       "font_style": "Normal",
+      "font_weight": 600,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-SemiBold.ttf"
+    },
+    {
+      "font_style": "Normal",
       "font_weight": 700,
       "font_stretch": "Normal",
       "family_name": "ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-Bold.ttf"
+    },
+    {
+      "font_style": "Normal",
+      "font_weight": 800,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-ExtraBold.ttf"
+    },
+    {
+      "font_style": "Normal",
+      "font_weight": 900,
+      "font_stretch": "Normal",
+      "family_name": "ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-Black.ttf"
     }
   ]
 }
