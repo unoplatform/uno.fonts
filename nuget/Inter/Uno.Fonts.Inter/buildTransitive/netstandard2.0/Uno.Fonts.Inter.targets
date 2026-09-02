@@ -1,0 +1,11 @@
+<Project>
+    <Target Name="UnoRemoveUnusedInter" AfterTargets="_UnoAddLibraryAssets">
+        <ItemGroup>
+            <!-- Heads that resolve weights through Inter.ttf.manifest (Skia) never read the variable font, so drop it. -->
+            <!-- Static instances are always kept: consumers reference them directly (e.g. Inter-Regular.ttf). -->
+            <_AllChildProjectItemsWithTargetPath
+                Remove="$(MSBuildThisFileDirectory)..\..\lib\netstandard2.0\Uno.Fonts.Inter\Fonts\Inter.ttf"
+                Condition="'$(SupportsFontManifest)'=='true'" />
+        </ItemGroup>
+    </Target>
+</Project>
