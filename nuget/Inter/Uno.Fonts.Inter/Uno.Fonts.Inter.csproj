@@ -14,16 +14,19 @@
 		<PackageId>Uno.Fonts.Inter</PackageId>
 		<DefaultLanguage>en-US</DefaultLanguage>
 		<LangVersion>10.0</LangVersion>
+		<PackageLicenseExpression>Apache-2.0 AND OFL-1.1</PackageLicenseExpression>
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>enable</WarningsAsErrors>
 		<Title>Uno Platform Inter Font</Title>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<Description>Uno Platform Inter Font — bundles the Inter variable font (Inter.ttf, weights 100-900) with static instances (Regular, Medium, SemiBold, Bold) and a font manifest for platforms without variable font support, for use with Uno Platform applications.</Description>
+		<Description>Uno Platform Inter Font. Bundles the Inter variable font (Inter.ttf) with static instances (Regular, Medium, SemiBold, Bold) and a font manifest that resolves FontWeight 400-700 to those instances on Skia and iOS targets, for use with Uno Platform applications.</Description>
 		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="../../icon.png" Pack="true" PackagePath="icon.png" />
+		<None Include="Fonts/OFL.txt" Pack="true" PackagePath="OFL.txt" />
+		<None Include="buildTransitive/netstandard2.0/Uno.Fonts.Inter.targets" Pack="true" PackagePath="buildTransitive/netstandard2.0/" />
 	</ItemGroup>
 
 	<Target Name="UnoForceIncludeIcon" BeforeTargets="_GetPackageFiles">
@@ -35,6 +38,12 @@
 		</ItemGroup>
 	</Target>
 
+	<!--
+	Font sources (OFL-1.1; verify with sha256sum, or `git hash-object` against the upstream blob):
+	  Inter.ttf   = google/fonts@e1d6480 ofl/inter/Inter[opsz,wght].ttf (Version 4.001;git-66647c0bb)
+	                sha256 29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031
+	  Inter-*.ttf = Inter static instances, Version 4.001;git-9221beed3
+	-->
 	<ItemGroup>
 		<Content Include="Fonts/*.ttf" />
 		<Content Include="Fonts/*.ttf.manifest" />
@@ -45,12 +54,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="Fonts\Inter-Regular.ttf" />
-		<None Remove="Fonts\Inter-Medium.ttf" />
-		<None Remove="Fonts\Inter-SemiBold.ttf" />
-		<None Remove="Fonts\Inter-Bold.ttf" />
-		<None Remove="Fonts\Inter.ttf" />
-		<None Remove="Fonts\Inter.ttf.manifest" />
+		<None Remove="Fonts\*.ttf;Fonts\*.ttf.manifest" />
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">

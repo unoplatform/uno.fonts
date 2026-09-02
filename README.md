@@ -9,6 +9,7 @@ Package|Stable|Preview
 Uno.Fonts.Fluent|[![NuGet stable](https://img.shields.io/nuget/v/Uno.Fonts.Fluent?label=stable)](https://www.nuget.org/packages/Uno.Fonts.Fluent)|[![NuGet preview](https://img.shields.io/nuget/vpre/Uno.Fonts.Fluent?label=preview)](https://www.nuget.org/packages/Uno.Fonts.Fluent)
 Uno.Fonts.Roboto|[![NuGet stable](https://img.shields.io/nuget/v/Uno.Fonts.Roboto?label=stable)](https://www.nuget.org/packages/Uno.Fonts.Roboto)|[![NuGet preview](https://img.shields.io/nuget/vpre/Uno.Fonts.Roboto?label=preview)](https://www.nuget.org/packages/Uno.Fonts.Roboto)
 Uno.Fonts.OpenSans|[![NuGet stable](https://img.shields.io/nuget/v/Uno.Fonts.OpenSans?label=stable)](https://www.nuget.org/packages/Uno.Fonts.OpenSans)|[![NuGet preview](https://img.shields.io/nuget/vpre/Uno.Fonts.OpenSans?label=preview)](https://www.nuget.org/packages/Uno.Fonts.OpenSans)
+Uno.Fonts.Inter|[![NuGet stable](https://img.shields.io/nuget/v/Uno.Fonts.Inter?label=stable)](https://www.nuget.org/packages/Uno.Fonts.Inter)|[![NuGet preview](https://img.shields.io/nuget/vpre/Uno.Fonts.Inter?label=preview)](https://www.nuget.org/packages/Uno.Fonts.Inter)
 
 Repository for NuGet packages that can be added to install fonts for any new or existing Uno application. Uno.Fonts currently offers the following fonts as NuGet packages:
 
@@ -64,9 +65,15 @@ Simply install the desired Uno.Fonts NuGet package into your Uno project's share
 
 ```xml
 
+<!-- Single reference: FontWeight picks the matching weight -->
+<FontFamily x:Key="MyRobotoFontFamily">ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto.ttf#Roboto</FontFamily>
+
+<!-- Pinned to one static instance -->
 <FontFamily x:Key="MyRobotoLightFontFamily">ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-Light.ttf</FontFamily>
 
 ```
+
+Uno.Fonts.Roboto and Uno.Fonts.Inter ship a variable font (`Roboto.ttf`, `Inter.ttf`) next to the static instances. On Skia and iOS heads a `.ttf.manifest` maps `FontWeight` to a static instance (Roboto: 300, 400, 500, 700; Inter: 400, 500, 600, 700; other weights snap to the nearest listed one, and italics are not covered). Skia heads drop the variable font from the app at build time. Other heads render the variable font directly, with its full weight range.
 
 > **NOTE**: If you are using the older versions of the Uno solution templates (with the `.shproj` file) then you will need to install the font NuGet package into each platform's `.csproj`
 
@@ -88,3 +95,7 @@ If you have an existing Uno Platform application using an older version of the f
 ## OpenSans Font
 
 [OpenSans](https://fonts.google.com/specimen/Open+Sans) is an open source humanist sans serif typeface designed by Steve Matteson. It's intended to be a replacement for Segoe UI for Uno applications, as Segoe UI isn't available on some platforms. In Uno 5.3, we introduce the ability to change the default font to OpenSans which is served through [Uno.Fonts.OpenSans NuGet package](https://www.nuget.org/packages/Uno.Fonts.OpenSans). For more information, see [Fonts documentation](https://aka.platform.uno/feature-opensans).
+
+## Inter Font
+
+[Inter](https://rsms.me/inter/) is an open source typeface designed for user interfaces, served through the [Uno.Fonts.Inter NuGet package](https://www.nuget.org/packages/Uno.Fonts.Inter). Reference it as `ms-appx:///Uno.Fonts.Inter/Fonts/Inter.ttf#Inter`, or pin a static instance such as `Inter-SemiBold.ttf`.

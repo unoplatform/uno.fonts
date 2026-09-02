@@ -168,6 +168,17 @@ jobs:
         name: NuGet-Inter
         path: nuget\Inter\Uno.Fonts.Inter\artifacts
 
+  validate_manifests:
+    name: Validate Font Manifests
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Check every *.ttf.manifest resolves to packed files
+      shell: pwsh
+      run: build/Test-FontManifests.ps1
+
   sign:
     name: Sign Artifacts
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')) }}
@@ -177,7 +188,7 @@ jobs:
     permissions:
       id-token: write # Required for requesting the JWT
 
-    needs: [build_fluent, build_roboto, build_opensans, build_inter]
+    needs: [build_fluent, build_roboto, build_opensans, build_inter, validate_manifests]
     steps:
       - name: Checkout
         uses: actions/checkout@v2

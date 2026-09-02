@@ -14,16 +14,19 @@
 		<PackageId>Uno.Fonts.Roboto</PackageId>
 		<DefaultLanguage>en-US</DefaultLanguage>
 		<LangVersion>10.0</LangVersion>
+		<PackageLicenseExpression>Apache-2.0 AND OFL-1.1</PackageLicenseExpression>
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>enable</WarningsAsErrors>
 		<Title>Uno Platform Roboto Font</Title>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<Description>Uno Platform Roboto Font</Description>
+		<Description>Uno Platform Roboto Font. Bundles the Roboto variable font (Roboto.ttf) with static instances (Light, Regular, Medium, Bold) and a font manifest that resolves FontWeight 300-700 to those instances on Skia and iOS targets, for use with Uno Platform applications.</Description>
 		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="../../icon.png" Pack="true" PackagePath="icon.png" />
+		<None Include="Fonts/OFL.txt" Pack="true" PackagePath="OFL.txt" />
+		<None Include="buildTransitive/netstandard2.0/Uno.Fonts.Roboto.targets" Pack="true" PackagePath="buildTransitive/netstandard2.0/" />
 	</ItemGroup>
 
 	<Target Name="UnoForceIncludeIcon" BeforeTargets="_GetPackageFiles">
@@ -35,6 +38,14 @@
 		</ItemGroup>
 	</Target>
 
+	<!--
+	Font sources (OFL-1.1; verify with sha256sum, or `git hash-object` against the upstream blob):
+	  Roboto.ttf                      = google/fonts@6183fc0 ofl/roboto/Roboto[wdth,wght].ttf (Version 3.015; 2026)
+	                                    sha256 d7598e12c5dbef095ff8272cfc55da0250bd07fbdecbac8a530b9b277872a134
+	  Roboto-Bold.ttf                 = google/fonts@7b64519 apache/roboto/Roboto-Bold.ttf (Version 2.137; 2017)
+	                                    sha256 7d0b991ee3e0be7af01ad7ea8cd2beea6c00a25e679a0226b6737f079aafff86
+	  Roboto-Light/Regular/Medium.ttf = Roboto Version 2.137; 2017 (glyf/hmtx/hinting tables identical to the google/fonts@7b64519 build)
+	-->
 	<ItemGroup>
 		<Content Include="Fonts/*.ttf" />
 		<Content Include="Fonts/*.ttf.manifest" />
@@ -45,13 +56,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="Fonts\Roboto-Light.ttf" />
-		<None Remove="Fonts\Roboto-Medium.ttf" />
-		<None Remove="Fonts\Roboto-Regular.ttf" />
-		<None Remove="Fonts\Roboto.ttf" />
-		<None Remove="Fonts\Roboto.ttf.manifest" />
+		<None Remove="Fonts\*.ttf;Fonts\*.ttf.manifest" />
 	</ItemGroup>
-	
+
 	<PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
 		<TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);CustomContentTarget</TargetsForTfmSpecificContentInPackage>
 	</PropertyGroup>
