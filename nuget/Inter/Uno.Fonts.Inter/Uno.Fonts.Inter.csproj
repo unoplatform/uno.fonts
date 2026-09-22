@@ -19,7 +19,7 @@
 		<WarningsAsErrors>enable</WarningsAsErrors>
 		<Title>Uno Platform Inter Font</Title>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<Description>Uno Platform Inter Font. Bundles the Inter variable font (Inter.ttf) with static instances for every weight from Thin to Black and a font manifest that resolves FontWeight 100-900 to those instances on Skia and iOS targets, for use with Uno Platform applications.</Description>
+		<Description>Uno Platform Inter Font. Bundles the Inter variable font (Inter.ttf) with upright and italic static instances for every weight from Thin to Black and a font manifest that resolves FontWeight 100-900 and FontStyle to those instances on Skia and iOS targets, for use with Uno Platform applications.</Description>
 		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
 
@@ -41,7 +41,7 @@
 	<!--
 	Font sources (OFL-1.1; per-file hashes in Fonts/SHA256SUMS, check with `sha256sum -c SHA256SUMS`):
 	  Inter.ttf   = google/fonts@e1d6480 ofl/inter/Inter[opsz,wght].ttf (Version 4.001;git-66647c0bb)
-	  Inter-*.ttf = rsms/inter v4.1 release, Inter-4.1.zip extras/ttf/ (Version 4.001;git-9221beed3)
+	  Inter-*.ttf = rsms/inter v4.1 release, Inter-4.1.zip extras/ttf/ (Version 4.001;git-9221beed3), upright and italic
 	                zip sha256 9883fdd4a49d4fb66bd8177ba6625ef9a64aa45899767dde3d36aa425756b11e
 	-->
 	<ItemGroup>

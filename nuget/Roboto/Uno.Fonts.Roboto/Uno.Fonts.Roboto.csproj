@@ -19,7 +19,7 @@
 		<WarningsAsErrors>enable</WarningsAsErrors>
 		<Title>Uno Platform Roboto Font</Title>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<Description>Uno Platform Roboto Font. Bundles the Roboto variable font (Roboto.ttf) with static instances for every weight from Thin to Black and a font manifest that resolves FontWeight 100-900 to those instances on Skia and iOS targets, for use with Uno Platform applications.</Description>
+		<Description>Uno Platform Roboto Font. Bundles the Roboto variable font (Roboto.ttf) with upright and italic static instances for every weight from Thin to Black and a font manifest that resolves FontWeight 100-900 and FontStyle to those instances on Skia and iOS targets, for use with Uno Platform applications.</Description>
 		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
 
@@ -43,7 +43,7 @@
 	  Roboto.ttf   = google/fonts@6183fc0 ofl/roboto/Roboto[wdth,wght].ttf (Version 3.015; 2026),
 	                 identical to googlefonts/roboto-classic v3.015 web/split/Roboto[wdth,wght].ttf
 	  Roboto-*.ttf = Google Fonts family download (https://fonts.google.com/download/list?family=Roboto),
-	                 static/Roboto-*.ttf, Roboto v51 (Version 3.015; 2026), hinted web build
+	                 static/Roboto-*.ttf upright and italic, Roboto v51 (Version 3.015; 2026), hinted web build
 	-->
 	<ItemGroup>
 		<Content Include="Fonts/*.ttf" />
