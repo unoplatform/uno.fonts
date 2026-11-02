@@ -3,8 +3,9 @@
         <ItemGroup>
             <!-- Heads that resolve weights through Inter.ttf.manifest (Skia) never read the variable font, so drop it. -->
             <!-- Static instances are always kept: consumers reference them directly (e.g. Inter-Regular.ttf). -->
+            <!-- The asset items hold full, normalized paths, so the path must be normalized to match. -->
             <_AllChildProjectItemsWithTargetPath
-                Remove="$(MSBuildThisFileDirectory)..\..\lib\netstandard2.0\Uno.Fonts.Inter\Fonts\Inter.ttf"
+                Remove="$([MSBuild]::NormalizePath('$(MSBuildThisFileDirectory)', '..', '..', 'lib', 'netstandard2.0', 'Uno.Fonts.Inter', 'Fonts', 'Inter.ttf'))"
                 Condition="'$(SupportsFontManifest)'=='true'" />
         </ItemGroup>
     </Target>
