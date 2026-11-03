@@ -39,6 +39,21 @@ https://github.com/icons8/line-awesome
 Winjs symbols
 https://github.com/winjs/winjs/tree/master/src/fonts
 
+The following compatibility glyphs reuse existing Uno artwork or independently drawn geometry:
+
+| Code point | Name | Artwork |
+| --- | --- | --- |
+| `U+E1DC` | CalendarMirrored | Existing `U+ED28` outline |
+| `U+E917` | Clock | Existing `U+E121` outline |
+| `U+EE7E` | FIDOPasskey | Fluent UI System Icons `Person Passkey`, 24 regular, outline-normalized |
+| `U+F034` | Widget | Original rounded frame, inset pane and three text strokes |
+| `U+F036` | WidgetAdd | Original widget with an open lower-right corner and circular add badge |
+| `U+F5B4` | ShieldLock | Fluent UI System Icons `Shield Lock`, 24 regular, outline-normalized |
+| `U+F785` | DeliveryOptimization | Original laptop frame with paired upload/download arrows |
+| `U+F8A6` | ExploitProtection | Original rounded frame containing three full-weight sliders |
+
+The Microsoft artwork is taken from [Fluent UI System Icons commit a347af95478f989038cccbf085978865264c048a](https://github.com/microsoft/fluentui-system-icons/tree/a347af95478f989038cccbf085978865264c048a). Its MIT notice is retained in [NOTICE](./NOTICE) and in the generated font's license metadata. The original drawings use a 24-unit design grid with 1.5-unit strokes, scaled to the font's 2,048-unit em. They are not extracted from a Windows font.
+
 ### Editing the font file
 
 Here are some steps to update the font to add missing icons:
