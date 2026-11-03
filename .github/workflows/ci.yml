@@ -20,6 +20,8 @@ jobs:
   build_fluent:
     name: Build Fluent
     runs-on: windows-latest
+    outputs:
+      SemVer2: ${{ steps.nbgv.outputs.SemVer2 }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -168,6 +170,30 @@ jobs:
         name: NuGet-Inter
         path: nuget\Inter\Uno.Fonts.Inter\artifacts
 
+  # One summary for the whole run: all four packages share the version computed by NBGV.
+  summary:
+    name: NuGet Summary
+    runs-on: ubuntu-latest
+    needs: [build_fluent, build_roboto, build_opensans, build_inter]
+    steps:
+    - name: Download the packages
+      uses: actions/download-artifact@v4
+      with:
+        pattern: NuGet-*
+        path: artifacts
+        merge-multiple: true
+
+    - name: Add NuGet Summary
+      shell: pwsh
+      run: |
+        echo "### NuGet Package Summary" >> $env:GITHUB_STEP_SUMMARY
+        echo "Package version: ${{ needs.build_fluent.outputs.SemVer2 }}" >> $env:GITHUB_STEP_SUMMARY
+        echo "<details><summary>Produced packages</summary>" >> $env:GITHUB_STEP_SUMMARY
+        echo "" >> $env:GITHUB_STEP_SUMMARY
+        Get-ChildItem "artifacts/*.nupkg" | Sort-Object Name | ForEach-Object { echo "- $($_.Name)" >> $env:GITHUB_STEP_SUMMARY }
+        echo "" >> $env:GITHUB_STEP_SUMMARY
+        echo "</details>" >> $env:GITHUB_STEP_SUMMARY
+
   validate_manifests:
     name: Validate Font Manifests
     runs-on: windows-latest
@@ -255,13 +281,62 @@ jobs:
           name: NuGet-Signed
           path: ./artifacts
 
-  publish:
-    name: Publish Packages
-    if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')) }}
+  # Same flow as uno.resizetizer and uno.templates: dev builds from main go to the Uno feed and nuget.org without
+  # approval; stable builds from release/* go to the Uno feed, then to nuget.org, each after the NuGet environment's
+  # approval.
+  publish_dev:
+    name: Publish Dev
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: windows-latest
+
+    needs: sign
+
+    steps:
+      - name: Download Signed Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: NuGet-Signed
+          path: artifacts
+
+      - name: Uno Feed Push
+        shell: pwsh
+        run: |
+          dotnet nuget add source https://pkgs.dev.azure.com/uno-platform/1dd81cbd-cb35-41de-a570-b0df3571a196/_packaging/unoplatformdev/nuget/v3/index.json -n "dev" --username az --password "${{ secrets.UNO_NUGET_FEED_API_KEY }}" --store-password-in-clear-text
+          dotnet nuget push --api-key AZ -s dev artifacts/**/*.nupkg --skip-duplicate
+
+      - name: NuGet Push
+        shell: pwsh
+        run: |
+          dotnet nuget push artifacts/**/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_ORG_API_KEY }} --skip-duplicate
+
+  publish_release_uno:
+    name: Publish Internal Feed
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/') }}
     runs-on: windows-latest
     environment: NuGet
 
     needs: sign
+
+    steps:
+      - name: Download Signed Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: NuGet-Signed
+          path: artifacts
+
+      - name: Uno Feed Push
+        shell: pwsh
+        run: |
+          dotnet nuget add source https://pkgs.dev.azure.com/uno-platform/1dd81cbd-cb35-41de-a570-b0df3571a196/_packaging/unoplatformdev/nuget/v3/index.json -n "dev" --username az --password "${{ secrets.UNO_NUGET_FEED_API_KEY }}" --store-password-in-clear-text
+          dotnet nuget push --api-key AZ -s dev artifacts/**/*.nupkg --skip-duplicate
+
+  publish_release_nuget_org:
+    name: Publish Production
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/') }}
+    runs-on: windows-latest
+    environment: NuGet
+
+    needs: publish_release_uno
 
     steps:
       - name: Download Signed Artifacts
@@ -282,7 +357,7 @@ jobs:
     permissions:
       contents: write
 
-    needs: publish
+    needs: publish_release_nuget_org
 
     steps:
       - name: Checkout
